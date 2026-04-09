@@ -1,0 +1,34 @@
+.interface {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: red;
+}
+
+.box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 40em;
+    width: 50em;
+    box-shadow: 0px 0px 10px #520e5f;
+    border-radius: 2em;
+    background-color: blue;
+    gap: 1em;
+}
+
+.search_box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+}
+
+.result_list {
+    max-height: 10em;
+    min-width: 20em;
+}
