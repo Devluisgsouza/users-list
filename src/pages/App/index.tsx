@@ -1,29 +1,33 @@
-import { useRef, useState } from 'react'
+import type { ChangeEvent } from 'react'
 import { useUsers } from '../../hooks/UseUsers'
-import { useDebouncedValue } from '../../hooks/useDebouncedValue'
-import { useClickOutside } from '../../hooks/useClickOutside'
-import type { User } from '../../types/User'
 import { filterUsersBySearch } from '../../utils/filterUsers'
 import { UserModal } from '../../components/UserModal/UserModal'
 import { UserListBlock } from './UserListBlock'
+import { useAppUserSearch } from './useAppUserSearch'
 import userLogo from '../../assets/user.png'
-
-const SEARCH_DEBOUNCE_MS = 500
 
 function App() {
   const { users, loading, error } = useUsers()
-  const [search, setSearch] = useState('')
-  const debouncedSearch = useDebouncedValue(search, SEARCH_DEBOUNCE_MS)
-  const [selectedUser, setSelectedUser] = useState<User | null>(null)
-  const [showAll, setShowAll] = useState(false)
-  const listRef = useRef<HTMLDivElement | null>(null)
-
-  useClickOutside(listRef, () => setShowAll(false))
+  const {
+    listRef,
+    search,
+    debouncedSearch,
+    showAll,
+    selectedUser,
+    setSearch,
+    showAllUsers,
+    selectUser,
+    closeModal,
+  } = useAppUserSearch()
 
   if (loading) return <p>Carregando...</p>
   if (error) return <p>{error}</p>
 
   const filteredUsers = filterUsersBySearch(users, debouncedSearch, showAll)
+
+  function handleSearchChange(event: ChangeEvent<HTMLInputElement>) {
+    setSearch(event.target.value)
+  }
 
   return (
     <section className="min-h-[98vh] flex items-center justify-center bg-gradient-to-br from-gray-950 via-purple-950 to-gray-950">
@@ -37,10 +41,7 @@ function App() {
             type="text"
             placeholder="Digite o nome do usuário..."
             value={search}
-            onChange={(e) => {
-              setSearch(e.target.value)
-              setShowAll(false)
-            }}
+            onChange={handleSearchChange}
             className="h-[15%] w-[90%] rounded-[0.8em] border-none p-3 shadow-[0px_0px_10px_#9200af] transition-shadow duration-200 hover:shadow-[0px_0px_20px_#9200af] focus:outline-none bg-black"
           />
         </div>
@@ -48,15 +49,12 @@ function App() {
           listRef={listRef}
           debouncedSearch={debouncedSearch}
           showAll={showAll}
-          onShowAll={() => setShowAll(true)}
+          onShowAll={showAllUsers}
           filteredUsers={filteredUsers}
-          onSelectUser={setSelectedUser}
+          onSelectUser={selectUser}
         />
       </div>
-      <UserModal
-        user={selectedUser}
-        onClose={() => setSelectedUser(null)}
-      />
+      <UserModal user={selectedUser} onClose={closeModal} />
     </section>
   )
 }
