@@ -1,73 +1,51 @@
-# React + TypeScript + Vite
+# Users List
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicação web para buscar e visualizar usuários consumindo a API pública [JSONPlaceholder](https://jsonplaceholder.typicode.com/). Inclui busca com debounce, listagem filtrada e modal com detalhes do usuário selecionado.
 
-Currently, two official plugins are available:
+## Stack e ferramentas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+| Categoria | Tecnologia |
+|-----------|------------|
+| **UI** | [React](https://react.dev/) 19 |
+| **Linguagem** | [TypeScript](https://www.typescriptlang.org/) |
+| **Build e dev server** | [Vite](https://vite.dev/) |
+| **Estilização** | [Tailwind CSS](https://tailwindcss.com/) (com PostCSS e Autoprefixer) |
+| **Qualidade de código** | [ESLint](https://eslint.org/) 9, `typescript-eslint`, plugins React |
+| **Ambiente de desenvolvimento** | [Cursor](https://cursor.com/) (editor com assistência por IA para implementação e refatoração) |
 
-## React Compiler
+## Pré-requisitos
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- [Node.js](https://nodejs.org/) (versão LTS recomendada)
+- npm (incluído com o Node)
 
-## Expanding the ESLint configuration
+## Como rodar o projeto
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Clone o repositório, instale as dependências e inicie o servidor de desenvolvimento:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+O Vite exibirá no terminal a URL local (por padrão `http://localhost:5173/`). Abra esse endereço no navegador para usar a aplicação.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Outros scripts
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+| Comando | Descrição |
+|---------|-----------|
+| `npm run dev` | Servidor de desenvolvimento com hot module replacement (HMR) |
+| `npm run build` | Verificação TypeScript (`tsc -b`) e build de produção |
+| `npm run preview` | Pré-visualização local do build de produção |
+| `npm run lint` | Executa o ESLint no projeto |
+
+## Estrutura resumida
+
+- `src/pages/App` — página principal, estado da busca e composição da UI
+- `src/components` — componentes reutilizáveis (ex.: modal)
+- `src/hooks` — hooks de dados e utilitários (ex.: debounce, clique fora)
+- `src/services` — chamadas à API
+- `src/types` — tipos TypeScript compartilhados
+
+## Licença
+
+Este projeto é privado (`"private": true` no `package.json`).
