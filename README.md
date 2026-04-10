@@ -46,4 +46,10 @@ O Vite exibirá no terminal a URL local (por padrão `http://localhost:5173/`). 
 - `src/services` — chamadas à API
 - `src/types` — tipos TypeScript compartilhados
 
+## Preview
+
+<p align="center">
+  <img src="./src/assets/page.png" width="600"/>
+  <img src="./src/assets/page2.png" width="600"/>
+</p>
 
