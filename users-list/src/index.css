@@ -1,4 +1,10 @@
-* {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Keep previous dark look as a baseline */
+body {
+  margin: 0;
   background-color: #000;
   color: #fff;
 }
