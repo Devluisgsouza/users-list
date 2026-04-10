@@ -52,4 +52,16 @@
     cursor: pointer;
 }
 
+.result_list button {
+    border: 1px solid #520e5f;
+    padding: 1em;
+    border-radius: 2em;
+    margin-top: 3em;
+    cursor: pointer;
+}
+
+.result_list button:hover {
+    box-shadow: 0px 0px 20px #9200af;
+}
+
 

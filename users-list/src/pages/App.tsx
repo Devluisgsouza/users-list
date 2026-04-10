@@ -10,6 +10,7 @@ function Users() {
   const [search, setSearch] = useState('')
   const [debouncedSearch, setDebouncedSearch] = useState('')
   const [selectedUser, setSelectedUser] = useState<User | null>(null)
+  const [showAll, setShowAll] = useState(false)
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -22,9 +23,11 @@ function Users() {
   if (loading) return <p>Carregando...</p>
   if (error) return <p>{error}</p>
 
-  const filteredUsers = users.filter((user) =>
-    user.name.toLowerCase().includes(debouncedSearch.toLowerCase())
-  )
+  const filteredUsers = showAll
+    ? users
+    : users.filter((user) =>
+        user.name.toLowerCase().includes(debouncedSearch.toLowerCase())
+      )
 
   return (
     <section className={styles.interface}>
@@ -35,12 +38,17 @@ function Users() {
             type="text"
             placeholder="Digite o nome do usuário..."
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => {
+              setSearch(e.target.value)
+              setShowAll(false)
+            }}
           />
         </div>
         <div className={styles.result_list}>
-          {debouncedSearch.trim() === '' ? (
-            <p>...</p>
+          {debouncedSearch.trim() === '' && !showAll ? (
+            <button onClick={() => setShowAll(true)} >
+              Mostrar todos os usuários
+            </button>
           ) : filteredUsers.length === 0 ? (
             <p>Nenhum usuário encontrado</p>
           ) : (
