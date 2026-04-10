@@ -6,11 +6,11 @@ Aplicação web para buscar e visualizar usuários consumindo a API pública [JS
 
 | Categoria | Tecnologia |
 |-----------|------------|
-| **UI** | [React](https://react.dev/) 19 |
+| **UI** | [React](https://react.dev/) v.19 |
 | **Linguagem** | [TypeScript](https://www.typescriptlang.org/) |
 | **Build e dev server** | [Vite](https://vite.dev/) |
 | **Estilização** | [Tailwind CSS](https://tailwindcss.com/) (com PostCSS e Autoprefixer) |
-| **Qualidade de código** | [ESLint](https://eslint.org/) 9, `typescript-eslint`, plugins React |
+| **Qualidade de código** | [ESLint](https://eslint.org/) v.9, `typescript-eslint`, plugins React |
 | **Ambiente de desenvolvimento** | [Cursor](https://cursor.com/) (editor com assistência por IA para implementação e refatoração) |
 
 ## Pré-requisitos
@@ -46,6 +46,4 @@ O Vite exibirá no terminal a URL local (por padrão `http://localhost:5173/`). 
 - `src/services` — chamadas à API
 - `src/types` — tipos TypeScript compartilhados
 
-## Licença
 
-Este projeto é privado (`"private": true` no `package.json`).
