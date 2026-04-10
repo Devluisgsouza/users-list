@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react'
 import { useUsers } from '../hooks/UseUsers'
 import styles from './App.module.css'
+import type { User } from '../types/User'
+import { UserModal } from '../components/UseModal/UserModal'
 
 function Users() {
   const { users, loading, error } = useUsers()
 
   const [search, setSearch] = useState('')
   const [debouncedSearch, setDebouncedSearch] = useState('')
+  const [selectedUser, setSelectedUser] = useState<User | null>(null)
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -33,7 +36,6 @@ function Users() {
             placeholder="Digite o nome do usuário..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className={styles.input}
           />
         </div>
         <div className={styles.result_list}>
@@ -43,13 +45,22 @@ function Users() {
             <p>Nenhum usuário encontrado</p>
           ) : (
             filteredUsers.map((user) => (
-              <p key={user.id}>
-                {user.id} - {user.name}
+              <p
+                key={user.id}
+                onClick={() => setSelectedUser(user)}
+                className={styles.result_item}
+              >
+                {user.name} - {user.email}
               </p>
             ))
           )}
         </div>
       </div>
+      <UserModal
+        user={selectedUser}
+        onClose={() => setSelectedUser(null)}
+      />
+      
     </section>
   )
 }

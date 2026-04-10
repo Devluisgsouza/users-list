@@ -1,0 +1,38 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user_card {
+    padding: 2em;
+    border-radius: 2em;
+    width: 30em;
+    max-height: 50em;
+    overflow-y: auto;
+    box-shadow: 0px 0px 20px #9200af;
+}
+
+.user_card h2 {
+    border-bottom: 1px solid #9200af;
+    padding-bottom: 0.5em;
+    margin-top: 1em;
+}
+
+.close {
+    display: flex;
+    justify-content: end;
+}
+
+.close button {
+    padding: 0.5em 1em;
+    cursor: pointer;
+    border: 1px solid #fff;
+    border-radius: 0.5em;
+}

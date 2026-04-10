@@ -26,7 +26,7 @@
     gap: 1em;
 }
 
-.input {
+.search_box input {
     width: 30em;
     height: 2em;
     border: none;
@@ -49,4 +49,7 @@
     max-height: 10em;
     min-width: 25em;
     border-radius: 1em;
+    cursor: pointer;
 }
+
+
