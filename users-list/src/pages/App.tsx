@@ -1,16 +1,18 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useUsers } from '../hooks/UseUsers'
 import styles from './App.module.css'
 import type { User } from '../types/User'
 import { UserModal } from '../components/UseModal/UserModal'
 
-function Users() {
+function App() {
   const { users, loading, error } = useUsers()
 
   const [search, setSearch] = useState('')
   const [debouncedSearch, setDebouncedSearch] = useState('')
   const [selectedUser, setSelectedUser] = useState<User | null>(null)
   const [showAll, setShowAll] = useState(false)
+  const listRef = useRef<HTMLDivElement | null>(null)
+
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -19,6 +21,23 @@ function Users() {
 
     return () => clearTimeout(timer)
   }, [search])
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        listRef.current &&
+        !listRef.current.contains(event.target as Node)
+      ) {
+        setShowAll(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
 
   if (loading) return <p>Carregando...</p>
   if (error) return <p>{error}</p>
@@ -44,7 +63,7 @@ function Users() {
             }}
           />
         </div>
-        <div className={styles.result_list}>
+        <div className={styles.result_list} ref={listRef}>
           {debouncedSearch.trim() === '' && !showAll ? (
             <button onClick={() => setShowAll(true)} >
               Mostrar todos os usuários
@@ -68,9 +87,8 @@ function Users() {
         user={selectedUser}
         onClose={() => setSelectedUser(null)}
       />
-      
     </section>
   )
 }
 
-export default Users
+export default App
