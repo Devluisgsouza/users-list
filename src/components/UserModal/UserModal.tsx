@@ -9,11 +9,11 @@ function getInitials(name: string) {
   return name.split(' ').slice(0, 2).map(n => n[0]).join('').toUpperCase()
 }
 
-function FieldRow({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
+function FieldRow({ label, value, accent, wrap }: { label: string; value: string; accent?: boolean; wrap?: boolean }) {
   return (
-    <div className="flex items-center px-3 py-2 bg-[#0d1117] border-b border-[#1f2937] last:border-b-0">
+    <div className={`flex ${wrap ? 'items-start' : 'items-center'} px-3 py-2 bg-[#0d1117] border-b border-[#1f2937] last:border-b-0`}>
       <span className="text-xs text-slate-500 w-24 flex-shrink-0">{label}</span>
-      <span className={`text-xs font-mono truncate ${accent ? 'text-cyan-400' : 'text-slate-300'}`}>
+      <span className={`text-xs font-mono ${wrap ? 'break-words min-w-0' : 'truncate'} ${accent ? 'text-cyan-400' : 'text-slate-300'}`}>
         {value}
       </span>
     </div>
@@ -88,7 +88,7 @@ export function UserModal({ user, onClose }: UserModalProps) {
 
           <Section label="Empresa">
             <FieldRow label="Nome" value={user.company.name} />
-            <FieldRow label="Slogan" value={user.company.catchPhrase} />
+            <FieldRow label="Slogan" value={user.company.catchPhrase} wrap />
             <FieldRow label="Bs" value={user.company.bs} />
           </Section>
         </div>
